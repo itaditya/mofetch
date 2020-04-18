@@ -1,0 +1,24 @@
+{
+  "name": "mofetch",
+  "version": "1.0.0",
+  "main": "main.bundle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itaditya/mofetch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/itaditya/mofetch/issues"
+  },
+  "homepage": "https://github.com/itaditya/mofetch#readme",
+  "description": "",
+  "devDependencies": {
+    "rollup": "^2.6.1"
+  }
+}
