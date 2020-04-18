@@ -1,12 +1,17 @@
 {
   "name": "mofetch",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "main.lib.js",
   "module": "main.es.js",
+  "files": [
+    "main.es.js",
+    "main.lib.js"
+  ],
   "scripts": {
     "examples:setup": "yarn build && cp main.es.js examples/next-kitchensink/src",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepublishOnly": "yarn build"
   },
   "keywords": [],
   "author": "",
