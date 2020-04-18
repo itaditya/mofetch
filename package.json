@@ -1,6 +1,6 @@
 {
   "name": "mofetch",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "main.lib.js",
   "module": "main.es.js",
   "files": [
@@ -31,5 +31,8 @@
   },
   "devDependencies": {
     "rollup": "^2.6.1"
+  },
+  "peerDependencies": {
+    "node-fetch": "^2.2.0"
   }
 }
