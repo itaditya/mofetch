@@ -1,3 +1,9 @@
+import Router from 'url-router';
+import fromEntries from 'object.fromentries';
+
+import { getConfig, setConfig } from './mockConfig';
+import realFetch from './realFetch';
+
 function logger(string) {
   console.log(`[mofetch] ${string}`);
 }
@@ -6,13 +12,7 @@ function loggerAPI({ method, url }) {
   logger(`${method}: ${url}`);
 }
 
-const mockConfig = {
-  baseUrl: '',
-  isInitialized: false,
-  delay: process.env.NODE_ENV === 'development' ? 400 : 0,
-};
-
-let router;
+const router = new Router();
 
 function getStoredUrl(url, method) {
   return `${method}:${url}`;
@@ -49,16 +49,8 @@ const mocker = {
   },
 };
 
-function serverFetch(url, ...restArgs) {
-  const nodeFetch = require('node-fetch');
-  const actualUrl = mockConfig.baseUrl + url;
-  return nodeFetch(actualUrl, ...restArgs);
-}
-
-const realFetch = typeof window === 'undefined' ? serverFetch : window.fetch;
-
 function getUrlData(url, method) {
-  const fromEntries = Object.fromEntries || require('object.fromentries');
+  const mockConfig = getConfig();
   const actualUrl = url.split(/[?#]/)[0];
 
   const parsedUrl = new URL(mockConfig.baseUrl + url);
@@ -80,6 +72,7 @@ function getMockHandler(url, method) {
 }
 
 const fakeFetch = async (url, options = {}) => {
+  const mockConfig = getConfig();
   const method = options.method || 'GET';
   const { handler, config, query, params } = getMockHandler(url, method);
 
@@ -109,21 +102,20 @@ const fakeFetch = async (url, options = {}) => {
   });
 };
 
-export function init(config) {
-  if (config.mockFetch) {
-    const routerImport = require('url-router');
-    const Router = typeof window === 'undefined' ? routerImport : routerImport.default;
-    router = new Router();
-  }
-  Object.assign(mockConfig, config, {
-    isInitialized: true,
-  });
-  return mocker;
-}
-
 export function fetch(...restArgs) {
+  const mockConfig = getConfig();
   if (!mockConfig.isInitialized) {
     throw new Error('Call init() in your app before using fetch.');
   }
   return mockConfig.mockFetch ? fakeFetch(...restArgs) : realFetch(...restArgs);
+}
+
+
+export function init(config) {
+  Object.assign(config, {
+    isInitialized: true,
+  });
+
+  setConfig(config);
+  return mocker;
 }

@@ -1,14 +1,12 @@
 {
   "name": "mofetch",
-  "version": "1.0.2",
-  "main": "main.lib.js",
-  "module": "main.es.js",
+  "version": "1.0.3",
+  "main": "dist/main.lib.js",
+  "module": "dist/main.es.js",
   "files": [
-    "main.es.js",
-    "main.lib.js"
+    "dist"
   ],
   "scripts": {
-    "examples:setup": "yarn build && cp main.es.js examples/next-kitchensink/src",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c",
     "prepublishOnly": "yarn build"
@@ -30,7 +28,8 @@
     "url-router": "^11.0.3"
   },
   "devDependencies": {
-    "rollup": "^2.6.1"
+    "rollup": "^2.6.1",
+    "rollup-plugin-terser": "^5.3.0"
   },
   "peerDependencies": {
     "node-fetch": "^2.2.0"

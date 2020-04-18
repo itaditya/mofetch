@@ -1,7 +1,7 @@
 import { init } from '../utils/mofetch';
 
 const mocker = init({
-  baseUrl: process.NODE_ENV === 'production' ? 'https://prod_url.com' : 'http://localhost:3000',
+  baseUrl: process.env.NODE_ENV === 'production' ? 'https://prod_url.com' : 'http://localhost:3000',
   mockFetch: process.env.MOCK_FETCH,
 });
 
