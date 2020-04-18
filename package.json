@@ -1,6 +1,6 @@
 {
   "name": "mofetch",
-  "version": "1.0.2-debug-v1",
+  "version": "1.0.2-debug-v2",
   "main": "main.lib.js",
   "module": "main.es.js",
   "files": [

@@ -112,7 +112,8 @@ const fakeFetch = async (url, options = {}) => {
 export function init(config) {
   if (config.mockFetch) {
     const routerImport = require('url-router');
-    const Router = routerImport.default;
+    console.log(routerImport);
+    const Router = routerImport;
     router = new Router();
   }
   Object.assign(mockConfig, config, {
