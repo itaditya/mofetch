@@ -35,6 +35,17 @@ const users = await res.json(); // array of users
 1. Run frontend apps on platforms like CodeSandbox without any need for API.
 1. Simulate race-conditions by changing response delay of individual APIs.
 
+### Installation Instructions
+1. Install `mofetch` and it's peer dependency `node-fetch`.
+
+```sh
+npm install node-fetch mofetch
+```
+
+1. You can copy the basic configuration from any of the examples.
+
+**Note-** You need to provide `baseUrl` because `node-fetch` uses absolute urls so we'll call `http://localhost:3000/api/todos` if you set `baseUrl` to `http://localhost:3000`.
+
 ### How it works
 
 `mofetch` is by default an isomorphic fetch library so you can use it on server and browser both. But when you enable `mockFetch: true` the fetch function will first check if the url is assigned a mock handler. Based on the handler `fetch` function returns the data.
