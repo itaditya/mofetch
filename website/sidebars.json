@@ -1,0 +1,6 @@
+{
+  "docs": {
+    "Getting Started": ["introduction", "installation"],
+    "Guide": ["setup-nextjs", "setup-cra"]
+  }
+}

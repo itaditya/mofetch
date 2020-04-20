@@ -1,0 +1,55 @@
+/**
+ * Copyright (c) 2017-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/* your custom css */
+
+.fixedHeaderContainer {
+  padding: 15px 0;
+}
+
+.fixedHeaderContainer header img {
+  margin-right: 20px;
+}
+
+.faq-wrapper .post {
+  margin-bottom:  40px;
+}
+
+.faq-article {
+  max-width: 60ch;
+  margin-bottom: 30px;
+}
+
+.nav-footer .copyright {
+  color: hsla(0, 0%, 100%, 0.8);
+  text-align: left;
+}
+
+.nav-footer .sitemap .nav-home {
+  opacity: 1;
+  padding: 0;
+  margin: 0 40px 0 0;
+ }
+
+ .nav-footer .sitemap .logo-credits {
+   margin-top: 20px;
+ }
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+}
+
+@media only screen and (min-width: 1024px) {
+}
+
+@media only screen and (max-width: 1023px) {
+}
+
+@media only screen and (min-width: 1400px) {
+}
+
+@media only screen and (min-width: 1500px) {
+}
