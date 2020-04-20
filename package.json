@@ -7,6 +7,7 @@
     "dist"
   ],
   "scripts": {
+    "docs": "cd website && npm start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c",
     "prepublishOnly": "yarn build"

@@ -1,24 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { fetch, init } from 'mofetch';
+import { fetch } from 'mofetch';
 
 import './styles.css';
-
-const mocker = init({
-  baseUrl: 'http://localhost:3000',
-  mockFetch: true,
-});
-
-mocker.get('/api/todos', function handler() {
-  return {
-    status: 200,
-    data: [
-      {
-        id: 1,
-        name: 'Mocked User 1',
-      },
-    ],
-  };
-});
 
 export default function App() {
   const [stateUsers, setStateUsers] = useState([]);
