@@ -1,17 +1,32 @@
-import fs from 'fs';
-const pkg = JSON.parse(fs.readFileSync('./package.json'));
+import { terser } from 'rollup-plugin-terser';
 
-export default {
-  input: 'src/index.js',
-  sourceMap: true,
-  output: [
-    {
-      file: pkg.main,
-      format: 'cjs',
-    },
-    {
-      file: pkg.module,
-      format: 'es',
-    },
-  ],
-};
+export default [
+  {
+    input: 'src/development.js',
+    output: [
+      {
+        file: 'dist/development.lib.js',
+        format: 'cjs',
+      },
+      {
+        file: 'dist/development.es.js',
+        format: 'es',
+      },
+    ],
+    plugins: [terser()],
+  },
+  {
+    input: 'src/production.js',
+    output: [
+      {
+        file: 'dist/production.lib.js',
+        format: 'cjs',
+      },
+      {
+        file: 'dist/production.es.js',
+        format: 'es',
+      },
+    ],
+    plugins: [terser()],
+  },
+];

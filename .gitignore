@@ -25,3 +25,6 @@ yarn-error.log*
 # bundle code
 *.es.js
 *.lib.js
+
+!dist/main.es.js
+!dist/main.lib.js

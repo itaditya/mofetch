@@ -6,9 +6,11 @@
     "dev": "next dev",
     "dev:mocked": "MOCK_FETCH=true next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "next build && next export"
   },
   "dependencies": {
+    "mofetch": "^1.0.3",
     "next": "9.2.2",
     "react": "16.13.0",
     "react-dom": "16.13.0"
