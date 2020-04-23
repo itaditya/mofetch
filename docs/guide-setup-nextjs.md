@@ -35,9 +35,11 @@ export default MyApp;
 
 ## Configure Mofetch
 
-You can choose to configure in the `_app.js` file or create a separate file and import that in `_app.js`.
+Now you need to configure mofetch in the `_app.js` file. You're free to create a separate file and import that in `_app.js` as well.
 
 ```js
+// src/pages/_app.js
+
 import { init } from 'mofetch';
 
 const mocker = init({
@@ -93,4 +95,41 @@ About.getInitialProps = async function () {
     todos,
   };
 };
+```
+
+## Make your app production-ready
+
+Mofetch doesn't include the mocking features in its production bundle so you have to make sure that your app doesn't use the mocking features in production. We recommend to create an env variable `MOCK_FETCH` and set it to true only in development and testing environments. This way you can choose to toggle mocking feature on or off. The below example also shows how to change the API url based on environment.
+
+```js
+// src/pages/_app.js
+
+import { init } from 'mofetch';
+
+const mocker = init({
+  baseUrl: process.env.NODE_ENV === 'production' ? 'http://my-api-server.com/api' :  'http://localhost:3000',
+  mockFetch: process.env.MOCK_FETCH, // make sure mockFetch is a falsy value in production.
+});
+
+// only mock APIs when MOCK_FETCH is a truthy value.
+if (process.env.MOCK_FETCH) {
+  mocker.get('/api/todos', {
+    status: 200,
+    data: [],
+  });
+}
+
+// other code
+```
+
+You're free to choose to name the env variables anything or use a different technique. If you go ahead with the env variable `MOCK_FETCH` then make sure you tell Next.js about it like this.
+
+```js
+// next.config.js
+
+module.exports = {
+  env: {
+    MOCK_FETCH: process.env.MOCK_FETCH,
+  },
+}
 ```
