@@ -29,16 +29,10 @@ class HomeSplash extends React.Component {
       </div>
     );
 
-    const Logo = props => (
-      <div className="projectLogo">
-        <img src={props.img_src} alt="Project Logo" />
-      </div>
-    );
-
     const ProjectTitle = props => (
       <h2 className="projectTitle">
         {props.title}
-        <small>{props.tagline}</small>
+        <small className="projectTagline">{props.tagline}</small>
       </h2>
     );
 
@@ -60,13 +54,11 @@ class HomeSplash extends React.Component {
 
     return (
       <SplashContainer>
-        <Logo img_src={`${baseUrl}img/undraw_monitor.svg`} />
         <div className="inner">
           <ProjectTitle tagline={siteConfig.tagline} title={siteConfig.title} />
           <PromoSection>
-            <Button href="#try">Try It Out</Button>
-            <Button href={docUrl('introduction')}>Example Link</Button>
-            <Button href={docUrl('doc2.html')}>Example Link 2</Button>
+            <Button href={docUrl('introduction')}>Get Started</Button>
+            <Button href={docUrl('setup-nextjs')}>Next.js Guide</Button>
           </PromoSection>
         </div>
       </SplashContainer>
@@ -74,23 +66,24 @@ class HomeSplash extends React.Component {
   }
 }
 
+const Block = props => (
+  <Container
+    padding={['bottom', 'top']}
+    id={props.id}
+    background={props.background}>
+    <GridBlock
+      align="center"
+      contents={props.children}
+      layout={props.layout}
+    />
+  </Container>
+);
+
 class Index extends React.Component {
   render() {
     const {config: siteConfig, language = ''} = this.props;
     const {baseUrl} = siteConfig;
 
-    const Block = props => (
-      <Container
-        padding={['bottom', 'top']}
-        id={props.id}
-        background={props.background}>
-        <GridBlock
-          align="center"
-          contents={props.children}
-          layout={props.layout}
-        />
-      </Container>
-    );
 
     const FeatureCallout = () => (
       <div
@@ -146,13 +139,19 @@ class Index extends React.Component {
     );
 
     const Features = () => (
-      <Block layout="fourColumn">
+      <Block layout="threeColumn">
         {[
           {
             content: 'This is the content of my feature',
             image: `${baseUrl}img/undraw_react.svg`,
             imageAlign: 'top',
             title: 'Feature One',
+          },
+          {
+            content: 'The content of my second feature',
+            image: `${baseUrl}img/undraw_operating_system.svg`,
+            imageAlign: 'top',
+            title: 'Feature Two',
           },
           {
             content: 'The content of my second feature',

@@ -22,7 +22,7 @@ const users = [
 
 const siteConfig = {
   title: 'Mofetch', // Title for your website.
-  tagline: 'A website for testing',
+  tagline: 'An isomorphic fetch utility with first class support for mocking API responses.',
   url: 'https://mofetch.netlify.app', // Your website URL
   baseUrl: '/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:

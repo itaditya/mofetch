@@ -23,7 +23,7 @@
     "url": "https://github.com/itaditya/mofetch/issues"
   },
   "homepage": "https://github.com/itaditya/mofetch#readme",
-  "description": "",
+  "description": "An isomorphic fetch utility with first class support for mocking API responses.",
   "dependencies": {
     "object.fromentries": "^2.0.2",
     "url-router": "^11.0.3"
