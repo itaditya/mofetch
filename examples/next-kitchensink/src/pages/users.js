@@ -17,8 +17,8 @@ const About = (props) => {
 };
 
 About.getInitialProps = async function () {
-  const resTodos = await fetch('/api/users');
-  const users = await resTodos.json();
+  const resUsers = await fetch('/api/users');
+  const users = await resUsers.json();
 
   return {
     users,

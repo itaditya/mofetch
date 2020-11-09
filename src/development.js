@@ -72,6 +72,7 @@ function getMockHandler(url, method) {
 }
 
 const fakeFetch = async (url, options = {}) => {
+  console.log(`url`, url); // aditodo remove this
   const mockConfig = getConfig();
   const method = options.method || 'GET';
   const { handler, config, query, params } = getMockHandler(url, method);
@@ -86,12 +87,18 @@ const fakeFetch = async (url, options = {}) => {
     function send() {
       try {
         const isFunction = typeof handler === 'function';
-        const { status, data } = isFunction ? handler({ query, params, options }) : handler;
-        resolve({
-          status: status,
-          ok: status < 400,
-          json: () => Promise.resolve(data),
+        const { data, ...fetchOptions } = isFunction ? handler({ query, params, options }) : handler;
+        const body = JSON.stringify(data);
+
+        const res = new Response(body, {
+          url, // for node-fetch Response
+          ...fetchOptions,
         });
+        // for browser Response
+        Object.defineProperty(res, 'url', { value: url, enumerable: true });
+        Object.defineProperty(res, 'type', { value: 'basic', enumerable: true });
+
+        resolve(res);
       } catch (error) {
         reject(error);
       }
