@@ -9,7 +9,7 @@
   "main": "src/index.js",
   "dependencies": {
     "mofetch": "1.0.3",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-scripts": "3.0.1"
