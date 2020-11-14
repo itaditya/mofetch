@@ -10,7 +10,7 @@
     "export": "next build && next export"
   },
   "dependencies": {
-    "mofetch": "^1.0.3",
+    "mofetch": "0.0.0-beta-v1",
     "next": "9.5.5",
     "react": "16.13.0",
     "react-dom": "16.13.0"
