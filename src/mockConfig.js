@@ -1,5 +1,4 @@
 const mockConfig = {
-  baseUrl: '',
   isInitialized: false,
   delay: process.env.NODE_ENV === 'development' ? 400 : 0,
 };

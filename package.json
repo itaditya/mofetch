@@ -1,8 +1,8 @@
 {
   "name": "mofetch",
-  "version": "1.0.3",
-  "main": "dist/main.lib.js",
-  "module": "dist/main.es.js",
+  "version": "0.0.0-beta-v1",
+  "main": "dist/mofetch.lib.js",
+  "module": "dist/mofetch.es.js",
   "files": [
     "dist"
   ],

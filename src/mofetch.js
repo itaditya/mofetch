@@ -2,7 +2,6 @@ import Router from 'url-router';
 import fromEntries from 'object.fromentries';
 
 import { getConfig, setConfig } from './mockConfig';
-import realFetch from './realFetch';
 
 function logger(string) {
   console.log(`[mofetch] ${string}`);
@@ -21,7 +20,7 @@ function getStoredUrl(url, method) {
 const mocker = {
   handle(url, method, handler, config = {}) {
     const storedUrl = getStoredUrl(url, method);
-    if(!router) {
+    if (!router) {
       throw new Error('You have to enable mocking by setting mockFetch to true');
     }
     router.add(storedUrl, {
@@ -51,28 +50,41 @@ const mocker = {
 
 function getUrlData(url, method) {
   const mockConfig = getConfig();
+
+  console.log(`url`, url); // aditodo remove this
+
   const actualUrl = url.split(/[?#]/)[0];
+  if (!url.includes(mockConfig.baseUrl)) {
+    url = mockConfig.baseUrl + url;
+  }
 
-  const parsedUrl = new URL(mockConfig.baseUrl + url);
+  const parsedUrl = new URL(url);
   const query = fromEntries(parsedUrl.searchParams.entries());
-  const storedUrl = getStoredUrl(actualUrl, method);
 
-  return { storedUrl, query };
+  const storedUrl = getStoredUrl(actualUrl, method);
+  console.log(`url actualUrl storedUrl`, url, actualUrl, storedUrl); // aditodo remove this
+  const routeData = router.find(storedUrl);
+
+  return { query, routeData };
 }
 
 function getMockHandler(url, method) {
-  const { storedUrl, query } = getUrlData(url, method);
-  const routeData = router.find(storedUrl);
+  console.log(`router`, router); // aditodo remove this
+  const { query, routeData } = getUrlData(url, method);
+
+  console.log(`routeData`, routeData); // aditodo remove this
   if (!routeData) {
     return {};
   }
+
   const { handler: handlerData, params } = routeData;
   const { handler, config } = handlerData;
   return { handler, config, query, params };
 }
 
-const fakeFetch = async (url, options = {}) => {
-  console.log(`url`, url); // aditodo remove this
+const realFetch = typeof window === 'undefined' ? global.fetch : window.fetch;
+
+async function fakeFetch(url, options = {}) {
   const mockConfig = getConfig();
   const method = options.method || 'GET';
   const { handler, config, query, params } = getMockHandler(url, method);
@@ -87,7 +99,9 @@ const fakeFetch = async (url, options = {}) => {
     function send() {
       try {
         const isFunction = typeof handler === 'function';
-        const { data, ...fetchOptions } = isFunction ? handler({ query, params, options }) : handler;
+        const { data, ...fetchOptions } = isFunction
+          ? handler({ query, params, options })
+          : handler;
         const body = JSON.stringify(data);
 
         const res = new Response(body, {
@@ -107,7 +121,7 @@ const fakeFetch = async (url, options = {}) => {
     const delay = config.delay || mockConfig.delay;
     setTimeout(send, delay);
   });
-};
+}
 
 export function fetch(...restArgs) {
   const mockConfig = getConfig();
@@ -116,7 +130,6 @@ export function fetch(...restArgs) {
   }
   return mockConfig.mockFetch ? fakeFetch(...restArgs) : realFetch(...restArgs);
 }
-
 
 export function init(config) {
   Object.assign(config, {

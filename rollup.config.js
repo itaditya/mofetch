@@ -2,28 +2,14 @@ import { terser } from 'rollup-plugin-terser';
 
 export default [
   {
-    input: 'src/development.js',
+    input: 'src/mofetch.js',
     output: [
       {
-        file: 'dist/development.lib.js',
+        file: 'dist/mofetch.lib.js',
         format: 'cjs',
       },
       {
-        file: 'dist/development.es.js',
-        format: 'es',
-      },
-    ],
-    plugins: [terser()],
-  },
-  {
-    input: 'src/production.js',
-    output: [
-      {
-        file: 'dist/production.lib.js',
-        format: 'cjs',
-      },
-      {
-        file: 'dist/production.es.js',
+        file: 'dist/mofetch.es.js',
         format: 'es',
       },
     ],
